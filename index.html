@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joesil's Scroll Portfolio</title>
+  <link rel="stylesheet" href="Portfolioscroll.css">
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</head>
+<body style="background: #000;">
+
+  <div id="particles-js" style="position:fixed; top:0; left:0; width:100%; height:100%; min-width:100vw; min-height:100vh; z-index:-1; background:#000;"></div>
+
+  <header class="responsive-header">
+    <div class="profile-img">
+      <img src="Joey.jpg" alt="Joey" class="responsive-img">
+    </div>
+    <div class="intro">
+      Hello there,<br>
+      <span class="shiny-text">I am Joesil Mosquiza</span>
+      <br>
+      <span class="cool-underline">and this is my portfolio<span class="moving-light"></span></span>
+      <br>
+      <span class="neon-glow">Neon Glow</span>
+      <br>
+      <span class="scroll-down-text">scroll down</span>
+    </div>
+  </header>
+
+  <section id="about" class="about-section">
+    <h2>About Me</h2>
+    <p class="about-reveal">Hello, I am Joesil A. Mosquiza, 20 years old, and a 3rd-year BSIT student at St. Mary's College of Bansalan Inc. I live with my grandma in Rizal, Bansalan, Davao del Sur. I graduated from Rizal Elementary School, completed my high school education at Nazareth High School, and I am currently pursuing my college degree at St. Mary’s. I chose BSIT because my strand in high school was TVL - ICT, so I decided to continue in the same field. Being an IT student is fun since our projects are very enjoyable.</p>
+    <br><br>
+    <p class="about-reveal">I sometimes forget things, especially names, but I usually remember faces. I enjoy playing online games like Mobile Legends, Call of Duty Mobile, Rules of Survival, and Roblox. I'm also an anime fan, and I really like Dolce Amore.</p>
+    <script>
+      // Scroll-reveal animation for About Me paragraphs
+      function revealAbout() {
+        document.querySelectorAll('.about-reveal').forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.85) {
+            el.classList.add('visible');
+          } else {
+            el.classList.remove('visible');
+          }
+        });
+      }
+      window.addEventListener('scroll', revealAbout);
+      window.addEventListener('resize', revealAbout);
+      document.addEventListener('DOMContentLoaded', revealAbout);
+    </script>
+  </section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-box">
+      <img src="HTML.png" alt="HTML">
+      <p>HTML</p>
+      <div class="progress-bar">
+        <div class="progress" style="width: 20%">20%</div>
+      </div>
+    </div>
+    <div class="skill-box">
+      <img src="Netbeans.png" alt="NetBeans">
+      <p>NetBeans (Java)</p>
+      <div class="progress-bar">
+        <div class="progress" style="width: 15%">15%</div>
+      </div>
+    </div>
+    <div class="skill-box">
+      <img src="Photoshop.png" alt="Photoshop">
+      <p>Photoshop</p>
+      <div class="progress-bar">
+        <div class="progress" style="width: 65%">65%</div>
+      </div>
+    </div>
+    <div class="skill-box">
+      <img src="mysql.png" alt="MySQL">
+      <p>MySQL</p>
+      <div class="progress-bar">
+        <div class="progress" style="width: 35%">35%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="carousel-content">
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <div class="carousel-item">
+          <img src="Arduino-Gamedev.jpg" alt="Final Project">
+          <div class="custom-scroll-text">
+            <h3>Final Project (Arduino Game Dev)</h3>
+            <p>This photo was taken during our Arduino and Game Development project. Although I don’t have a picture of our final output, this was captured on the second to the last day before our final performance.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="Arduino.jpg" alt="First Project">
+          <div class="custom-scroll-text">
+            <h3>First Project (Arduino)</h3>
+            <p>This was my first project for Basic Arduino Hardware and Coding. It may not be perfect, but I'm still learning — and I'm proud of what I've accomplished.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="Dasureco.png" alt="DASURECO Logo">
+          <div class="custom-scroll-text">
+            <h3>DASURECO Logo</h3>
+            <p>This was my entry for the DASURECO 50th Anniversary Logo design using Photoshop. Although it wasn't a school project, I consider it one of my personal projects.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="dashboard.jpg" alt="Web Designing">
+          <div class="custom-scroll-text">
+            <h3>Web Designing (Dashboard)</h3>
+            <p>This was my first project designing a gaming dashboard during my first year in college.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="carousel-dots"></div>
+  </div>
+</section>
+
+  <section id="events" class="events-section">
+    <h2>Events</h2>
+    <p>This is a collection of events I participated in. These include Acquaintance, Recollection, Concert for a Cause, Catholic Teachers Day, IT Day, Work Immersion, Typing Speed, and more.<br>On mobile devices, images may appear cropped or not fully visible sorry for any inconvenience!</p>
+    <div class="events-grid">
+      <img src="ITDay.jpg" alt="IT Day Event" class="square-img">
+      <img src="WorkImmersion.jpg" alt="Work Immersion" class="square-img">
+      <img src="Concert for a cause.jpg" alt="Concert for a Cause" class="square-img">
+      <img src="Happy Catholic Teachers Day.jpg" alt="Teachers Day" class="square-img">
+    </div>
+    <div class="events-grid">
+      <img src="Workimmersion2.jpg" alt="Work Immersion 2" class="square-img">
+      <img src="Recollection.jpg" alt="Recollection" class="square-img">
+      <img src="Typingspeed.jpg" alt="Joey" class="square-img">
+      <img src="ITDay2.jpg" alt="IT Day 2" class="square-img">
+    </div>
+
+  <div class="socials">
+    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+  </div>
+
+  <section id="contact" class="contact-section">
+    <div class="contact-card">
+      <h2>Contact</h2>
+      <form action="https://formspree.io/f/mvgqaqog" method="POST" class="formspree-form">
+        <label>
+          Your email:<br>
+          <input type="email" name="email" required>
+        </label>
+        <br>
+        <label>
+          Your message:<br>
+          <textarea name="message" rows="4" required></textarea>
+        </label>
+        <br>
+        <button type="submit">Send</button>
+      </form>
+      <div class="contact-links" style="margin-top:18px;">
+        <a href="https://www.facebook.com/joesil.mosquiza.2024" target="_blank"><img src="Facebook.png" alt="Facebook" style="width:40px;height:40px;margin-right: 20px;"></a>
+        <a href="https://www.instagram.com/kjows_/" target="_blank"><img src="Instagram.png" alt="Instagram" style="width:40px;height:40px;"></a>
+        <a href="https://discord.gg/GNHeR367" target="_blank"><img src="Discord.png" alt="Discord" style="width:70px;height:40px;"></a>
+      </div>
+    </div>
+  </section>
+  <div class="back-to-top-container">
+  <button id="backToTop" style="background:#2196f3; color:#fff; border:none; border-radius:8px; padding:14px 38px; font-size:1.1em; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.10); transition:background 0.2s; display:block; margin:0 auto;">↑ Back to Top</button>
+</div>
+
+
+<script src="Portfolioscroll.js"></script>
+<script>
+// Automatic carousel slide for Projects section
+document.addEventListener('DOMContentLoaded', function() {
+  var track = document.querySelector('.carousel-track');
+  var items = document.querySelectorAll('.carousel-item');
+  var dots = document.getElementById('carousel-dots');
+  if (!track || items.length === 0) return;
+  var current = 0;
+  var total = items.length;
+  function showSlide(idx) {
+    track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+    if (dots) {
+      Array.from(dots.children).forEach(function(dot, i) {
+        dot.classList.toggle('active', i === idx);
+      });
+    }
+  }
+  // Dots (if present)
+  if (dots && dots.children.length === 0) {
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement('span');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', (function(i) {
+        return function() {
+          current = i;
+          showSlide(current);
+        };
+      })(i));
+      dots.appendChild(dot);
+    }
+  }
+  showSlide(current);
+  setInterval(function() {
+    current = (current + 1) % total;
+    showSlide(current);
+  }, 10000);
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.querySelector('.contact-form');
+  var sentMsg = document.getElementById('sent-message');
+  var backToTopBtn = document.getElementById('backToTop');
+  if (form && sentMsg) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      sentMsg.style.display = 'block';
+      form.reset();
+    });
+  }
+
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+});
+</script>
+</body>
+</html>
