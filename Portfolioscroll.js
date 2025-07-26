@@ -1,3 +1,31 @@
+// Hide events-grid when modal is open
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  const closeBtn = document.getElementById('closeModal');
+  if (modal && modalImg && closeBtn) {
+    document.querySelectorAll('.events-grid img').forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        document.body.classList.add('modal-open');
+      });
+    });
+    function closeModal() {
+      modal.style.display = 'none';
+      modalImg.src = '';
+      modalImg.alt = '';
+      document.body.classList.remove('modal-open');
+    }
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  }
+});
 // Show gooey nav only after welcome overlay is gone
 document.addEventListener('DOMContentLoaded', function() {
   var overlay = document.getElementById('welcome-overlay');

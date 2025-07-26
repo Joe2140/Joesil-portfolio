@@ -11,6 +11,32 @@
   <link rel="stylesheet" href="Portfolioscroll.css">
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<style>
+.light-active {
+  position: relative;
+  overflow: hidden;
+}
+.light-active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: moveLightBtn 2.2s linear infinite;
+  pointer-events: none;
+}
+@keyframes moveLightBtn {
+  0% {
+    left: -60%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+</style>
 </head>
 
 <body style="background: #000;">
@@ -133,7 +159,7 @@
 <section id="tools">
   <h2>Tools</h2>
   <div style="text-align:center; margin-bottom:18px;">
-    <button onclick="toggleTools()" id="toggleBtn" class="centered-btn">SHOW TOOLS</button>
+    <button onclick="toggleTools()" id="toggleBtn" class="centered-btn light-active">SHOW TOOLS</button>
   </div>
   <div id="toolsContent" style="display: none;">
     <div class="skills-grid" style="margin-bottom: 18px;">
@@ -212,12 +238,29 @@
       <img src="Concert for a cause.jpg" alt="Concert for a Cause" class="square-img">
       <img src="Happy Catholic Teachers Day.jpg" alt="Teachers Day" class="square-img">
     </div>
+
     <div class="events-grid">
       <img src="Workimmersion2.jpg" alt="Work Immersion 2" class="square-img">
       <img src="Recollection.jpg" alt="Recollection" class="square-img">
       <img src="Typingspeed.jpg" alt="Joey" class="square-img">
       <img src="ITDay2.jpg" alt="IT Day 2" class="square-img">
     </div>
+
+  <!-- Image Modal for Events -->
+  <div id="imageModal" class="image-modal">
+    <div class="modal-content">
+      <button id="closeModal" class="close-btn">✕</button>
+      <img id="modalImage" src="" alt="Full View">
+    </div>
+  </div>
+
+  <!-- Image Modal for Events -->
+  <div id="imageModal" class="image-modal">
+    <div class="modal-content">
+      <button id="closeModal" class="close-btn">✕</button>
+      <img id="modalImage" src="" alt="Full View">
+    </div>
+  </div>
 
   <div class="socials">
     <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -251,9 +294,101 @@
   <button id="backToTop" style="background:#2196f3; color:#fff; border:none; border-radius:8px; padding:14px 38px; font-size:1.1em; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.10); transition:background 0.2s; display:block; margin:0 auto;">↑ Back to Top</button>
 </div>
 
+<style>
+.image-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.modal-content {
+  position: relative;
+  background: #111;
+  padding: 10px;
+  border-radius: 12px;
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 10px;
+  object-fit: contain;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 4px 10px;
+  transition: background 0.2s;
+  z-index: 10000;
+  overflow: hidden;
+}
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+.close-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: moveLightX 2s linear infinite;
+  pointer-events: none;
+}
+@keyframes moveLightX {
+  0% { left: -60%; }
+  100% { left: 120%; }
+}
+</style>
 <script src="Portfolioscroll.js"></script>
 <script>
-// Automatic carousel slide for Projects section
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImage');
+const closeBtn = document.getElementById('closeModal');
+document.querySelectorAll('.events-grid img').forEach(img => {
+  img.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+  });
+});
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+  modalImg.src = '';
+  modalImg.alt = '';
+});
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+    modalImg.src = '';
+    modalImg.alt = '';
+  }
+});
+</script>
+<script>
+// Improved automatic carousel slide for Projects section with robust pause/resume on user interaction
 document.addEventListener('DOMContentLoaded', function() {
   var track = document.querySelector('.carousel-track');
   var items = document.querySelectorAll('.carousel-item');
@@ -261,6 +396,9 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!track || items.length === 0) return;
   var current = 0;
   var total = items.length;
+  var autoSlideTimer = null;
+  var AUTO_SLIDE_DELAY = 10000;
+
   function showSlide(idx) {
     track.style.transform = 'translateX(' + (-idx * 100) + '%)';
     if (dots) {
@@ -269,6 +407,16 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   }
+
+  function resetAutoSlide() {
+    if (autoSlideTimer) clearTimeout(autoSlideTimer);
+    autoSlideTimer = setTimeout(function autoNext() {
+      current = (current + 1) % total;
+      showSlide(current);
+      resetAutoSlide();
+    }, AUTO_SLIDE_DELAY);
+  }
+
   // Dots (if present)
   if (dots && dots.children.length === 0) {
     for (var i = 0; i < total; i++) {
@@ -278,16 +426,44 @@ document.addEventListener('DOMContentLoaded', function() {
         return function() {
           current = i;
           showSlide(current);
+          resetAutoSlide(); // reset timer on dot click
         };
       })(i));
       dots.appendChild(dot);
     }
   }
+
+  // Touch swipe handling
+  var carouselContainer = document.querySelector('.carousel-container');
+  var startX = 0;
+  var isDragging = false;
+  if (carouselContainer) {
+    carouselContainer.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    });
+    carouselContainer.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      var currentX = e.touches[0].clientX;
+      var diff = startX - currentX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          current = (current + 1) % total;
+        } else {
+          current = (current - 1 + total) % total;
+        }
+        showSlide(current);
+        resetAutoSlide(); // reset timer on swipe
+        isDragging = false;
+      }
+    });
+    carouselContainer.addEventListener('touchend', function() {
+      isDragging = false;
+    });
+  }
+
   showSlide(current);
-  setInterval(function() {
-    current = (current + 1) % total;
-    showSlide(current);
-  }, 10000);
+  resetAutoSlide();
 });
 </script>
 <script>
@@ -325,9 +501,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (content.style.display === "none") {
       content.style.display = "block";
       button.textContent = "HIDE TOOLS";
+      button.classList.remove("light-active"); // Remove moving light when shown
     } else {
       content.style.display = "none";
       button.textContent = "SHOW TOOLS";
+      button.classList.add("light-active"); // Add moving light when hidden
     }
   }
 </script>

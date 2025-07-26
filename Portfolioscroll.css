@@ -1,3 +1,6 @@
+body.modal-open .events-grid {
+  display: none !important;
+}
 /* Utility class for hiding elements */
 .hidden {
   display: none !important;
