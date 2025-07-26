@@ -1,4 +1,4 @@
-    particlesJS("particles-js", {
+particlesJS("particles-js", {
       particles: {
         number: { value: 60, density: { enable: true, value_area: 800 } },
         color: { value: "#00bfff" },
@@ -176,4 +176,63 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Initial update
   updateCarousel();
+});
+
+// Welcome overlay logic with fade-out
+window.addEventListener('DOMContentLoaded', function() {
+  const overlay = document.getElementById('welcome-overlay');
+  const continueBtn = document.getElementById('continueBtn');
+  const music = document.getElementById('bg-music');
+  const musicBtn = document.getElementById('musicBtn');
+  let isPlaying = false;
+  if (overlay && continueBtn) {
+    document.body.style.overflow = 'hidden';
+    continueBtn.addEventListener('click', function() {
+      overlay.style.opacity = '0';
+      setTimeout(function() {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 700);
+      // Try to play music on continue
+      if (music && music.paused) {
+        music.play();
+        isPlaying = true;
+        if (musicBtn) musicBtn.textContent = '🔈';
+      }
+    });
+  }
+  // Music controls logic
+  if (music && musicBtn) {
+    music.volume = 1.0;
+    // Try to autoplay on page load
+    music.play().then(() => {
+      isPlaying = true;
+      musicBtn.textContent = '🔈';
+    }).catch(() => {
+      musicBtn.textContent = '🔊';
+    });
+    musicBtn.addEventListener('click', function() {
+      if (music.paused) {
+        music.play();
+        isPlaying = true;
+        musicBtn.textContent = '🔈';
+      } else {
+        music.pause();
+        isPlaying = false;
+        musicBtn.textContent = '🔊';
+      }
+    });
+    // Start music on first user interaction if not already playing
+    function playOnce() {
+      if (music.paused) {
+        music.play();
+        isPlaying = true;
+        musicBtn.textContent = '🔈';
+      }
+      window.removeEventListener('click', playOnce);
+      window.removeEventListener('keydown', playOnce);
+    }
+    window.addEventListener('click', playOnce);
+    window.addEventListener('keydown', playOnce);
+  }
 });
