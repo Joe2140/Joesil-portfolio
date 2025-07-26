@@ -1,3 +1,77 @@
+// Show gooey nav only after welcome overlay is gone
+document.addEventListener('DOMContentLoaded', function() {
+  var overlay = document.getElementById('welcome-overlay');
+  var continueBtn = document.getElementById('continueBtn');
+  var gooeyNav = document.querySelector('.gooey-nav');
+  if (overlay && continueBtn && gooeyNav) {
+    gooeyNav.classList.add('hidden');
+    continueBtn.addEventListener('click', function() {
+      setTimeout(function() {
+        gooeyNav.classList.remove('hidden');
+      }, 700); // matches overlay fade-out
+    });
+  } else if (gooeyNav) {
+    gooeyNav.classList.remove('hidden');
+  }
+});
+// Smooth scroll to top for Home button in gooey nav
+document.addEventListener('DOMContentLoaded', function() {
+  const homeLink = document.querySelector('.gooey-nav .nav-items li a[href="#home"]');
+  if (homeLink) {
+    homeLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Optionally close the nav after click
+      const gooeyNav = document.querySelector('.gooey-nav');
+      if (gooeyNav && gooeyNav.classList.contains('open')) {
+        gooeyNav.classList.remove('open');
+        const navBtn = document.querySelector('.nav-button');
+        if (navBtn) navBtn.setAttribute('aria-label', 'Open navigation');
+      }
+    });
+  }
+});
+// Gooey Navigation logic
+document.addEventListener('DOMContentLoaded', function() {
+  const gooeyNav = document.querySelector('.gooey-nav');
+  const navBtn = document.querySelector('.nav-button');
+  const navItems = document.querySelector('.nav-items');
+  if (gooeyNav && navBtn && navItems) {
+    navBtn.addEventListener('click', () => {
+      gooeyNav.classList.toggle('open');
+      navBtn.setAttribute('aria-label', gooeyNav.classList.contains('open') ? 'Close navigation' : 'Open navigation');
+    });
+    // Keyboard accessibility: open/close with Enter/Space
+    navBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        navBtn.click();
+      }
+    });
+    // Close nav when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!gooeyNav.contains(e.target) && gooeyNav.classList.contains('open')) {
+        gooeyNav.classList.remove('open');
+        navBtn.setAttribute('aria-label', 'Open navigation');
+      }
+    });
+    // Trap focus inside nav when open
+    navItems.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab' && gooeyNav.classList.contains('open')) {
+        const focusable = navItems.querySelectorAll('a');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
+});
 particlesJS("particles-js", {
       particles: {
         number: { value: 60, density: { enable: true, value_area: 800 } },

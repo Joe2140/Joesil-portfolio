@@ -15,6 +15,33 @@
 
 <body style="background: #000;">
 
+  <!-- Gooey Navigation -->
+  <nav class="gooey-nav hidden" aria-label="Main Navigation">
+    <button class="nav-button" aria-label="Open navigation" tabindex="0">
+      <span></span>
+    </button>
+    <ul class="nav-items">
+      <li><a href="#home" tabindex="0" aria-label="Home">🏠</a></li>
+      <li><a href="#about" tabindex="0" aria-label="About">👤</a></li>
+      <li><a href="#skills" tabindex="0" aria-label="Skills">🧠</a></li>
+      <li><a href="#tools" tabindex="0" aria-label="Tools">🛠️</a></li>
+      <li><a href="#projects" tabindex="0" aria-label="Projects">📁</a></li>
+      <li><a href="#events" tabindex="0" aria-label="Events">📅</a></li>
+      <li><a href="#contact" tabindex="0" aria-label="Contact">✉️</a></li>
+    </ul>
+    <!-- Gooey SVG Filter -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+          <feColorMatrix in="blur" mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="goo" />
+          <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+        </filter>
+      </defs>
+    </svg>
+  </nav>
+
 
   <!-- Welcome Overlay (must be first in body) -->
   <div id="welcome-overlay">
@@ -100,6 +127,40 @@
         <div class="progress" style="width: 35%">35%</div>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="tools">
+  <h2>Tools</h2>
+  <div style="text-align:center; margin-bottom:18px;">
+    <button onclick="toggleTools()" id="toggleBtn" class="centered-btn">SHOW TOOLS</button>
+  </div>
+  <div id="toolsContent" style="display: none;">
+    <div class="skills-grid" style="margin-bottom: 18px;">
+      <div class="tool-box">
+        <p>Web Design & Editing</p>
+        <small>
+          Figma, Photoshop, Canva, CapCut, PowerPoint
+        </small>
+      </div>
+      <div class="tool-box">
+        <p>Development</p>
+        <small>
+          HTML, CSS, Visual Studio Code
+        </small>
+      </div>
+      <div class="tool-box">
+        <p>Programming Languages</p>
+        <small>
+          Godot Engine, XAMPP, MySQL, Visual Basic Studio
+        </small>
+      </div>
+      <div class="tool-box">
+        <p>Learning Resources</p>
+        <small>
+          w3schools, FreeCodeCamp, MDN Web Docs
+        </small>
+      </div>
   </div>
 </section>
 
@@ -249,6 +310,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+</script>
+<script>
+  function showToolInfo(id) {
+    const infos = document.querySelectorAll('.tool-info');
+    infos.forEach(info => info.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+  }
+</script>
+<script>
+  function toggleTools() {
+    const content = document.getElementById("toolsContent");
+    const button = document.getElementById("toggleBtn");
+    if (content.style.display === "none") {
+      content.style.display = "block";
+      button.textContent = "HIDE TOOLS";
+    } else {
+      content.style.display = "none";
+      button.textContent = "SHOW TOOLS";
+    }
+  }
 </script>
 </body>
 </html>
